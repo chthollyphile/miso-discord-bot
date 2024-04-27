@@ -1,0 +1,49 @@
+name: BOT test
+
+on:
+  push:
+    branches: [ "dev", "main" ]
+  pull_request:
+    branches: [ "dev", "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    
+    - name: Comment out line
+      run: sed -i '19s/^/# /' misobot/CGresp.py
+      
+    - name: Install dependencies
+      run: |    
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install python-dateutil
+
+    - name: Run Python script
+      timeout-minutes: 1
+      env:
+        DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+      run: |
+        cd misobot
+        python bot.py
+      continue-on-error: true
+      id: run-python-script
+
+    - name: Check timeout status
+      if: steps.run-python-script.outcome == 'timed_out'
+      run: echo "::set-output name=timed_out::true"
+
+    - name: Check for success or failure
+      if: ${{ failure() && steps.check-timeout-status.outputs.timed_out != 'true' }}
+      run: echo "Test failed. Check the logs for details."

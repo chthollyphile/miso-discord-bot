@@ -1,0 +1,9 @@
+notion_client==1.0.0
+python-dotenv==0.21.1
+discord.py==2.3.2
+revChatGPT==6.8.6
+pykakasi==2.2.1
+asgiref==3.6.0
+plotly==5.13.1
+kaleido==0.2.1
+google-generativeai==0.4.1

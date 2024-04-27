@@ -1,0 +1,6 @@
+misobot/__pycache__/
+*.pyc
+misobot/.env
+misobot/.vscode/settings.json
+chatgpt_discord_bot.log
+starting-prompt.txt
