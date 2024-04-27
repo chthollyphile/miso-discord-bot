@@ -42,8 +42,6 @@ ENGINES = [
 
 - `/chats` 使用 openai-gpt4-8k 接口进行聊天。注意，该模型的token费用非常昂贵。
 
-- `/chats` 使用 openai-gpt4-8k 接口进行聊天。注意，该模型的token费用非常昂贵，大约是/chat的15到30倍。
-
 - `/summary ` 展示关于过去七天的聊天相关的数据和图表，并将其中消息最多的一个小时的消息内容发送给gpt4进行总结。
 
 - `/summarylatest ` 将过去一小时内的聊天消息内容发送给gpt4进行总结。
